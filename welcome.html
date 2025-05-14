@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome to PulseTag</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      background: linear-gradient(120deg, #ffffff 0%, #011472 100%);
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card {
+      background: rgba(255,255,255,0.22);
+      border-radius: 24px;
+      box-shadow: 0 12px 48px 0 rgba(30,60,120,0.18);
+      padding: 36px 32px 28px 32px;
+      max-width: 420px;
+      width: 100%;
+      backdrop-filter: blur(18px) saturate(1.5);
+      border: 1.5px solid rgba(255,255,255,0.22);
+    }
+    h2 {
+      text-align: center;
+      color: #6a82fb;
+      margin-bottom: 18px;
+    }
+    label {
+      display: block;
+      margin-bottom: 10px;
+      color: #23272f;
+      font-weight: 500;
+    }
+    input {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid #6a82fb55;
+      margin-top: 4px;
+      margin-bottom: 12px;
+      font-size: 1em;
+      background: #f8fafc;
+    }
+    button {
+      width: 100%;
+      padding: 10px 0;
+      border-radius: 8px;
+      border: none;
+      background: linear-gradient(120deg, #6a82fb 0%, #fc5c7d 100%);
+      color: #fff;
+      font-weight: 600;
+      font-size: 1.1em;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.2s;
+    }
+    button:hover {
+      background: linear-gradient(120deg, #fc5c7d 0%, #6a82fb 100%);
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2><i class="fa-solid fa-user-plus"></i> Welcome! Enter Your Emergency Profile</h2>
+    <form id="welcome-form" autocomplete="off">
+      <label>Name: <input type="text" name="name" required></label>
+      <label>Age: <input type="number" name="age" required></label>
+      <label>Gender: <input type="text" name="gender" required></label>
+      <label>Date of Birth: <input type="date" name="dob" required></label>
+      <label>Address: <input type="text" name="address" required></label>
+      <label>Emergency Contact: <input type="text" name="emergency_contact" required></label>
+      <label>Emergency Contact Number: <input type="tel" name="emergency_contact_number" required></label>
+      <label>Allergies: <input type="text" name="allergies"></label>
+      <label>Medical Conditions: <input type="text" name="medical_conditions"></label>
+      <label>Medications: <input type="text" name="medications"></label>
+      <label>Blood Type: <input type="text" name="blood_type"></label>
+      <label>Insurance Provider: <input type="text" name="insurance_provider"></label>
+      <label>Policy Number: <input type="text" name="policy_number"></label>
+      <label>Preferred Language: <input type="text" name="preferred_language"></label>
+      <label>Emergency Contact Relationship: <input type="text" name="emergency_contact_relationship"></label>
+      <label>Emergency Contact Phone: <input type="tel" name="emergency_contact_phone"></label>
+      <label>Emergency Contact Address: <input type="text" name="emergency_contact_address"></label>
+      <label>Profile Picture: <input type="file" name="profile_picture" accept="image/*"></label>
+      <label>Medical History: <input type="text" name="medical_history"></label>
+      <label>Living Will: <input type="text" name="living_will"></label>
+      <label>Organ Donor: <input type="checkbox" name="organ_donor"></label>
+      <button type="submit">Continue</button>
+    </form>
+  </div>
+  <script>
+document.getElementById('welcome-form').onsubmit = function(e) {
+  e.preventDefault();
+  const form = e.target;
+  localStorage.setItem('profile_name', form.name.value);
+  localStorage.setItem('profile_age', form.age.value);
+  localStorage.setItem('profile_gender', form.gender.value);
+  localStorage.setItem('profile_dob', form.dob.value);
+  localStorage.setItem('profile_address', form.address.value);
+  localStorage.setItem('profile_emergency_contact', form.emergency_contact.value);
+  localStorage.setItem('profile_emergency_contact_number', form.emergency_contact_number.value);
+  localStorage.setItem('profile_allergies', form.allergies.value);
+  localStorage.setItem('profile_medical_conditions', form.medical_conditions.value);
+  localStorage.setItem('profile_medications', form.medications.value);
+  localStorage.setItem('profile_blood_type', form.blood_type.value);
+  localStorage.setItem('profile_insurance_provider', form.insurance_provider.value);
+  localStorage.setItem('profile_policy_number', form.policy_number.value);
+  localStorage.setItem('profile_preferred_language', form.preferred_language.value);
+  localStorage.setItem('profile_medical_history', form.medical_history.value);
+  localStorage.setItem('profile_living_will', form.living_will.value);
+  localStorage.setItem('profile_organ_donor', form.organ_donor.checked ? "Yes" : "No");
+  localStorage.setItem('profile_emergency_contact_relationship', form.emergency_contact_relationship.value);
+  localStorage.setItem('profile_emergency_contact_phone', form.emergency_contact_phone.value);
+  localStorage.setItem('profile_emergency_contact_address', form.emergency_contact_address.value);
+  // Profile picture (optional, stores file name only for demo)
+  // Redirect to index.html
+  window.location.href = "index.html";
+};
+  </script>
+</body>
+</html>

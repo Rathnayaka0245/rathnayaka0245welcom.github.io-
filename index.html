@@ -1,0 +1,420 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PulseTag Emergency Profile</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    /* ...your existing CSS here... */
+    body {
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      min-height: 100vh;
+      margin: 0;
+      color: #23272f;
+      background: linear-gradient(120deg, #ffffff 0%, #011472 100%);
+      background-size: 200% 200%;;
+      animation: gradientMove 8s ease-in-out infinite;
+      letter-spacing: 0.01em;
+    }
+    @keyframes gradientMove {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+    .container {
+      max-width: 980px;
+      margin: 40px auto;
+      background: rgba(255,255,255,0.22);
+      border-radius: 36px;
+      box-shadow: 0 12px 48px 0 rgba(30,60,120,0.18), 0 1.5px 0 #e0e7ff;
+      padding: 48px 40px 40px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 44px;
+      border: 1.5px solid rgba(255,255,255,0.22);
+      backdrop-filter: blur(24px) saturate(1.5);
+      position: relative;
+      overflow: hidden;
+    }
+    .container::before {
+      content: "";
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 220px; height: 220px;
+      background: radial-gradient(circle, #6a82fb44 0%, transparent 80%);
+      z-index: 0;
+    }
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+      flex-wrap: wrap;
+      justify-content: center;
+      background: rgba(255,255,255,0.38);
+      border-radius: 28px;
+      box-shadow: 0 2px 24px rgba(100,100,255,0.13);
+      padding: 36px 32px;
+      position: relative;
+      overflow: hidden;
+      border: 1.5px solid rgba(106,130,251,0.18);
+      z-index: 1;
+    }
+    .profile-header::before {
+      content: "";
+      position: absolute;
+      top: -40px; left: -40px;
+      width: 120px; height: 120px;
+      background: radial-gradient(circle, #fc5c7d44 0%, transparent 80%);
+      z-index: 0;
+    }
+    .profile-pic-container {
+      z-index: 1;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .profile-pic-container img {
+      border-radius: 50%;
+      width: 170px;
+      height: 170px;
+      object-fit: cover;
+      border: 6px solid #fff;
+      box-shadow: 0 0 0 8px #fc5c7d55, 0 8px 40px 0 #6a82fb55;
+      background: #000000;
+      transition: box-shadow 0.4s, transform 0.3s;
+      outline: 3px solid #6a82fb;
+      outline-offset: 6px;
+    }
+    .profile-pic-container img:hover {
+      box-shadow: 0 0 0 16px #6a82fb88, 0 12px 48px 0 #fc5c7d66;
+      transform: scale(1.06) rotate(-2deg);
+    }
+    .basic-info {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      z-index: 1;
+      min-width: 260px;
+    }
+    .basic-info h2 {
+      font-size: 2.3em;
+      margin: 0 0 10px 0;
+      color: #fc5c7d;
+      letter-spacing: 1.5px;
+      font-weight: 800;
+      text-shadow: 0 2px 12px #fff3;
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    }
+    .basic-info .info-details {
+      font-size: 1.18em;
+      color: #2c3e50;
+      background: rgba(106,130,251,0.11);
+      border-radius: 16px;
+      padding: 18px 26px;
+      box-shadow: 0 2px 12px rgba(106,130,251,0.08);
+      line-height: 1.8;
+      font-weight: 500;
+      border: 1px solid #e0e7ff55;
+    }
+    .cards-grid {
+      display: flex;
+      gap: 36px;
+      flex-wrap: wrap;
+      justify-content: center;
+      z-index: 1;
+    }
+    .card {
+      flex: 1 1 280px;
+      min-width: 280px;
+      max-width: 360px;
+      background: linear-gradient(120deg, #ffffffcc 10%, #e3f0ff 100%);
+      border-radius: 22px;
+      box-shadow: 0 6px 32px rgba(106,130,251,0.13);
+      padding: 36px 30px 30px 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      border-left: 8px solid #fc5c7d;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.22s, box-shadow 0.22s, border-color 0.22s;
+      border-top: 1.5px solid #e0e7ff99;
+      border-bottom: 1.5px solid #e0e7ff55;
+      z-index: 1;
+    }
+    .card:hover {
+      transform: translateY(-10px) scale(1.035);
+      box-shadow: 0 16px 56px 0 #6a82fb44, 0 2px 8px #fc5c7d33;
+      border-left: 8px solid #6a82fb;
+    }
+    .card::after {
+      content: "";
+      position: absolute;
+      bottom: -30px; right: -30px;
+      width: 90px; height: 90px;
+      background: radial-gradient(circle, #6a82fb22 0%, transparent 80%);
+      z-index: 0;
+    }
+    .card h3 {
+      margin: 0 0 10px 0;
+      font-size: 1.35em;
+      color: #6a82fb;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      z-index: 1;
+      letter-spacing: 0.5px;
+    }
+    .card .card-content {
+      font-size: 1.13em;
+      color: #2c3e50;
+      z-index: 1;
+      line-height: 1.8;
+      padding-left: 2px;
+      font-weight: 500;
+    }
+    .card .card-content strong {
+      color: #fc5c7d;
+      font-weight: 600;
+      margin-right: 6px;
+    }
+    .card h3 .fa-solid, .card h3 .fa-regular {
+      font-size: 1.2em;
+      color: #fc5c7d;
+      margin-right: 6px;
+    }
+    @media (max-width: 900px) {
+      .container {
+        padding: 22px 2vw;
+      }
+      .cards-grid {
+        flex-direction: column;
+        gap: 28px;
+      }
+      .profile-header {
+        flex-direction: column;
+        gap: 28px;
+        padding: 22px 8px;
+      }
+      .profile-pic-container img {
+        width: 120px;
+        height: 120px;
+      }
+    }
+    @media (max-width: 600px) {
+      .container {
+        padding: 10px 0;
+      }
+      .profile-header {
+        padding: 12px 2px;
+      }
+      .card {
+        padding: 18px 10px 16px 10px;
+      }
+    }
+    /* Form styles */
+    #profile-form-section label {
+      display: block;
+      margin-bottom: 10px;
+      color: #23272f;
+      font-weight: 500;
+    }
+    #profile-form-section input[type="text"],
+    #profile-form-section input[type="number"],
+    #profile-form-section input[type="date"],
+    #profile-form-section input[type="tel"] {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid #6a82fb55;
+      margin-top: 4px;
+      margin-bottom: 12px;
+      font-size: 1em;
+      background: #f8fafc;
+    }
+    #profile-form-section button {
+      width: 100%;
+      padding: 10px 0;
+      border-radius: 8px;
+      border: none;
+      background: linear-gradient(120deg, #6a82fb 0%, #fc5c7d 100%);
+      color: #fff;
+      font-weight: 600;
+      font-size: 1.1em;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.2s;
+    }
+    #profile-form-section button:hover {
+      background: linear-gradient(120deg, #fc5c7d 0%, #6a82fb 100%);
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <!-- Welcome Form Card -->
+  <div id="profile-form-section" class="cards-grid" style="display:none;">
+    <div class="card" style="max-width:420px;margin:auto;">
+      <h3 style="text-align:center;"><i class="fa-solid fa-user-plus"></i> Welcome! Enter Your Emergency Profile</h3>
+      <form id="profile-form" autocomplete="off">
+        <label>Name: <input type="text" name="name" required></label>
+        <label>Age: <input type="number" name="age" required></label>
+        <label>Gender: <input type="text" name="gender" required></label>
+        <label>Date of Birth: <input type="date" name="dob" required></label>
+        <label>Address: <input type="text" name="address" required></label>
+        <label>Emergency Contact: <input type="text" name="emergency_contact" required></label>
+        <label>Emergency Contact Number: <input type="tel" name="emergency_contact_number" required></label>
+        <label>Allergies: <input type="text" name="allergies"></label>
+        <label>Medical Conditions: <input type="text" name="medical_conditions"></label>
+        <label>Medications: <input type="text" name="medications"></label>
+        <label>Blood Type: <input type="text" name="blood_type"></label>
+        <label>Insurance Provider: <input type="text" name="insurance_provider"></label>
+        <label>Policy Number: <input type="text" name="policy_number"></label>
+        <label>Preferred Language: <input type="text" name="preferred_language"></label>
+        <label>Emergency Contact Relationship: <input type="text" name="emergency_contact_relationship"></label>
+        <label>Emergency Contact Phone: <input type="tel" name="emergency_contact_phone"></label>
+        <label>Emergency Contact Address: <input type="text" name="emergency_contact_address"></label>
+        <label>Medical History: <input type="text" name="medical_history"></label>
+        <label>Living Will: <input type="text" name="living_will"></label>
+        <label>Organ Donor: <input type="checkbox" name="organ_donor"></label>
+        <button type="submit" class="edit-btn" style="width:100%;margin-top:12px;">Save</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Profile Cards (hidden until form is submitted) -->
+  <div id="profile-cards" style="display:none;">
+    <div class="profile-header">
+      <div class="profile-pic-container">
+        <img id="profile-picture" src="5472d1b09d3d724228109d381d617326.jpg" alt="Profile Picture">
+      </div>
+      <div class="basic-info">
+        <h2 id="card-name"></h2>
+        <div class="info-details" id="card-basic"></div>
+      </div>
+    </div>
+    <div class="cards-grid">
+      <div class="card">
+        <h3><i class="fa-solid fa-notes-medical"></i>Medical</h3>
+        <div class="card-content" id="card-medical"></div>
+      </div>
+      <div class="card">
+        <h3><i class="fa-solid fa-phone-volume"></i>Emergency Contacts</h3>
+        <div class="card-content" id="card-contacts"></div>
+      </div>
+      <div class="card">
+        <h3><i class="fa-regular fa-id-card"></i>Other Info</h3>
+        <div class="card-content" id="card-other"></div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:24px;">
+      <button id="edit-profile" class="edit-btn" style="padding:10px 28px;">Edit Profile</button>
+    </div>
+  </div>
+</div>
+<script>
+function fillProfileFromStorage() {
+  document.getElementById('card-name').textContent = localStorage.getItem('profile_name') || '';
+  document.getElementById('card-basic').innerHTML =
+    (localStorage.getItem('profile_age') || '') + " years old, " +
+    (localStorage.getItem('profile_gender') || '') + "<br>" +
+    "Date of Birth: " + (localStorage.getItem('profile_dob') || '') + "<br>" +
+    "Address: " + (localStorage.getItem('profile_address') || '') + "<br>";
+
+  document.getElementById('card-medical').innerHTML =
+    "<strong>Allergies:</strong> " + (localStorage.getItem('profile_allergies') || '') + "<br>" +
+    "<strong>Medical Conditions:</strong> " + (localStorage.getItem('profile_medical_conditions') || '') + "<br>" +
+    "<strong>Medications:</strong> " + (localStorage.getItem('profile_medications') || '') + "<br>" +
+    "<strong>Blood Type:</strong> " + (localStorage.getItem('profile_blood_type') || '') + "<br>" +
+    "<strong>Medical History:</strong> " + (localStorage.getItem('profile_medical_history') || '') + "<br>";
+
+  document.getElementById('card-contacts').innerHTML =
+    "<strong>Emergency Contact:</strong> " + (localStorage.getItem('profile_emergency_contact') || '') + "<br>" +
+    "<strong>Contact Number:</strong> " + (localStorage.getItem('profile_emergency_contact_number') || '') + "<br>" +
+    "<strong>Relationship:</strong> " + (localStorage.getItem('profile_emergency_contact_relationship') || '') + "<br>" +
+    "<strong>Phone:</strong> " + (localStorage.getItem('profile_emergency_contact_phone') || '') + "<br>" +
+    "<strong>Address:</strong> " + (localStorage.getItem('profile_emergency_contact_address') || '') + "<br>";
+
+  document.getElementById('card-other').innerHTML =
+    "<strong>Insurance Provider:</strong> " + (localStorage.getItem('profile_insurance_provider') || '') + "<br>" +
+    "<strong>Policy Number:</strong> " + (localStorage.getItem('profile_policy_number') || '') + "<br>" +
+    "<strong>Preferred Language:</strong> " + (localStorage.getItem('profile_preferred_language') || '') + "<br>" +
+    "<strong>Living Will:</strong> " + (localStorage.getItem('profile_living_will') || '') + "<br>" +
+    "<strong>Organ Donor:</strong> " + (localStorage.getItem('profile_organ_donor') || '') + "<br>";
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+  // Show cards if data exists, else show form
+  if (localStorage.getItem('profile_name')) {
+    document.getElementById('profile-form-section').style.display = 'none';
+    document.getElementById('profile-cards').style.display = '';
+    fillProfileFromStorage();
+  } else {
+    document.getElementById('profile-form-section').style.display = '';
+    document.getElementById('profile-cards').style.display = 'none';
+  }
+
+  // Form submit handler
+  document.getElementById('profile-form').onsubmit = function(e) {
+    e.preventDefault();
+    const form = e.target;
+    localStorage.setItem('profile_name', form.name.value);
+    localStorage.setItem('profile_age', form.age.value);
+    localStorage.setItem('profile_gender', form.gender.value);
+    localStorage.setItem('profile_dob', form.dob.value);
+    localStorage.setItem('profile_address', form.address.value);
+    localStorage.setItem('profile_emergency_contact', form.emergency_contact.value);
+    localStorage.setItem('profile_emergency_contact_number', form.emergency_contact_number.value);
+    localStorage.setItem('profile_allergies', form.allergies.value);
+    localStorage.setItem('profile_medical_conditions', form.medical_conditions.value);
+    localStorage.setItem('profile_medications', form.medications.value);
+    localStorage.setItem('profile_blood_type', form.blood_type.value);
+    localStorage.setItem('profile_insurance_provider', form.insurance_provider.value);
+    localStorage.setItem('profile_policy_number', form.policy_number.value);
+    localStorage.setItem('profile_preferred_language', form.preferred_language.value);
+    localStorage.setItem('profile_medical_history', form.medical_history.value);
+    localStorage.setItem('profile_living_will', form.living_will.value);
+    localStorage.setItem('profile_organ_donor', form.organ_donor.checked ? "Yes" : "No");
+    localStorage.setItem('profile_emergency_contact_relationship', form.emergency_contact_relationship.value);
+    localStorage.setItem('profile_emergency_contact_phone', form.emergency_contact_phone.value);
+    localStorage.setItem('profile_emergency_contact_address', form.emergency_contact_address.value);
+
+    fillProfileFromStorage();
+    document.getElementById('profile-form-section').style.display = 'none';
+    document.getElementById('profile-cards').style.display = '';
+  };
+
+  // Edit button handler
+  document.getElementById('edit-profile').onclick = function() {
+    document.getElementById('profile-form-section').style.display = '';
+    document.getElementById('profile-cards').style.display = 'none';
+    // Optionally, pre-fill the form with existing data
+    const form = document.getElementById('profile-form');
+    form.name.value = localStorage.getItem('profile_name') || '';
+    form.age.value = localStorage.getItem('profile_age') || '';
+    form.gender.value = localStorage.getItem('profile_gender') || '';
+    form.dob.value = localStorage.getItem('profile_dob') || '';
+    form.address.value = localStorage.getItem('profile_address') || '';
+    form.emergency_contact.value = localStorage.getItem('profile_emergency_contact') || '';
+    form.emergency_contact_number.value = localStorage.getItem('profile_emergency_contact_number') || '';
+    form.allergies.value = localStorage.getItem('profile_allergies') || '';
+    form.medical_conditions.value = localStorage.getItem('profile_medical_conditions') || '';
+    form.medications.value = localStorage.getItem('profile_medications') || '';
+    form.blood_type.value = localStorage.getItem('profile_blood_type') || '';
+    form.insurance_provider.value = localStorage.getItem('profile_insurance_provider') || '';
+    form.policy_number.value = localStorage.getItem('profile_policy_number') || '';
+    form.preferred_language.value = localStorage.getItem('profile_preferred_language') || '';
+    form.medical_history.value = localStorage.getItem('profile_medical_history') || '';
+    form.living_will.value = localStorage.getItem('profile_living_will') || '';
+    form.organ_donor.checked = (localStorage.getItem('profile_organ_donor') === "Yes");
+    form.emergency_contact_relationship.value = localStorage.getItem('profile_emergency_contact_relationship') || '';
+    form.emergency_contact_phone.value = localStorage.getItem('profile_emergency_contact_phone') || '';
+    form.emergency_contact_address.value = localStorage.getItem('profile_emergency_contact_address') || '';
+  };
+});
+</script>
+</body>
+</html>
